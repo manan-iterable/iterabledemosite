@@ -4,16 +4,9 @@ var email = localStorage.getItem("email") || null;
 var apikey = 'ff288e91e5f9442cb6ce6ea238886298';
 
 
-var renderEmailInput = '<hr><label for="email"><b>Email</b></label>\n<input type="text" name="email" id="email" pattern=".+@globex\.com" required>\n<button class="btn btn-primary" type="button" id="email" onclick="addemail()">Add email</button><hr>';
+var renderEmailInput = '<hr><label for="email"><b>Email</b></label>\n<input type="text" name="email" id="email" pattern=".+@globex\.com" required>\n<button class="btn btn-success" type="button" id="email" onclick="addemail()">Add email</button></br><small>Please enter your email.</small><hr>';
 var renderExistingEmail = `Alreday logged in as: ${email}`;
 
-var registerd = `Great! you've registerd successfully`;
-
-var identifybutton = '<button class="btn btn-primary" type="button" onclick="identifyUser()">Identify User</button>'
-
-var trackcustomevents = '<button class="btn btn-primary" type="button" id="customevent" onclick="sendCustomEvent()">Send Custom Event</button>'
-
-var getinappMessages = '<button class="btn btn-primary" type="button" onclick="getmessage()">getmessage </button>'
 
 if(email == null){
     document.querySelector(".emailbox").innerHTML = renderEmailInput   

@@ -1,11 +1,17 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: "sofia-pro",sans-serif;  
+  font: 14px ;
   background-color: black;
+  color: #4d4d4d;
 }
 
 a {
-  color: #00B7FF;
+  color: #59c1a7;
+}
+.btn .btn-primary {
+  color: #59c1a7;
+  
 }
 /* Add padding to containers */
 .container {
@@ -18,20 +24,22 @@ input[type=text], input[type=password] {
   padding: 15px;
   margin: 5px 0 22px 0;
   display: inline-block;
-  border: none;
+  border: 2px solid black;
   background: #f1f1f1;
 }
 /* Set a style for the submit button */
 .registerbtn {
   background-color: #04AA6D;
-  color: white;
+  color: #4d4d4d;
   padding: 16px 20px;
   margin: 8px 0;
   border: none;
   cursor: pointer;
   width: 100%;
   opacity: 0.9;
+  font-family: "sofia-pro",sans-serif;
 }
 .registerbtn:hover {
   opacity: 1;
 }
+
