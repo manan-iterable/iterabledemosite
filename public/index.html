@@ -8,24 +8,28 @@
         <!-- Optional; provides methods for query string parsing and working with cookies -->
         <script type="text/javascript" src="https://js.iterable.com/iterableUtils.js"></script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-
+        
         <!-- Enter an email address, then click the button to track an event -->
         
         <div class="container">
-            <h3 id="h3">Get started</h3>
-            <hr>
-            <label for="email"><b>Email</b></label>
-            <input type="text" name="email" id="email" required>
-            <button class="btn btn-primary" type="button" id="email" onclick="addemail()">Add email</button>
-            <hr>
+            <h3>Get started</h3>
+            <div class="emailbox"></div></br>
+            <div class="btn1"></div></br>
+            <div class="btn2"></div></br>
+            <div class="btn3"></div></br>
+            <!-- <hr>
+                <label for="email"><b>Email</b></label>
+                <input type="text" name="email" id="email" required>
+                <button class="btn btn-primary" type="button" id="email" onclick="addemail()">Add email</button>
+                <hr> -->
+                
+                <!-- <button class="btn btn-primary" type="button" onclick="identifyUser()">Identify User</button> -->
+                <!-- <button class="btn btn-primary" type="button" id="customevent" onclick="sendCustomEvent()">Send Custom Event</button> -->
+                <!-- <button class="btn btn-primary" type="button" onclick="getmessage()">getmessage </button> -->
+                <!-- <button class="btn btn-primary" type="button" onclick="trackEvent()">Track MyButtonClickedEvent</button> -->
+                <div id="rendermessage"></div>
+            </div>
             
-            <button class="btn btn-primary" type="button" onclick="identifyUser()">Identify User</button>
-            <button class="btn btn-primary" type="button" id="customevent" onclick="sendCustomEvent()">Send Custom Event</button>
-            <button class="btn btn-primary" type="button" onclick="getmessage()">getmessage </button>
-            <!-- <button class="btn btn-primary" type="button" onclick="trackEvent()">Track MyButtonClickedEvent</button> -->
-            <div id="rendermessage"></div>
-          </div>
-
-    </body>
+        </body>
+        <script type="text/javascript" src="../javascripts/iter.js"></script>
 </html>
