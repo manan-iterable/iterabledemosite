@@ -24,9 +24,9 @@ router.get('/health', (req, res)=>{
   let data = {"success":true}
   res.send(data);
 })
-router.get('/first', firstIndex);
-router.get('/getUserShoppinCart', getShoppingCart.getShoppingCart);
-router.get('/checkShopping', getShoppingCart.checkShopping);
+router.get('/api/first', firstIndex);
+router.get('/api/getUserShoppinCart', getShoppingCart.getShoppingCart);
+router.get('/api/checkShopping', getShoppingCart.checkShopping);
 
 app.use(router);
 
