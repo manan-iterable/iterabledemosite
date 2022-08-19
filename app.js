@@ -1,14 +1,16 @@
 'use strict';
 // require('dotenv').config()
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-
-var app = express();
-
+const app = express();
+const router = express.Router();
+//router imports
+const firstIndex = require('./routes/firstIndex'); 
+const getShoppingCart = require('./routes/getShoppingCart'); 
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -18,10 +20,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/favicon.ico', (req, res) => res.status(204));
 
-app.get('/getmessage', (req, res)=>{
-  let data = "getmessage api works"
+router.get('/health', (req, res)=>{
+  let data = {"success":true}
   res.send(data);
 })
+router.get('/first', firstIndex);
+router.get('/getUserShoppinCart', getShoppingCart.getShoppingCart);
+router.get('/checkShopping', getShoppingCart.checkShopping);
+
+app.use(router);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

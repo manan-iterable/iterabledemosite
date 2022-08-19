@@ -9,7 +9,7 @@ body {
 a {
   color: #59c1a7;
 }
-.btn .btn-primary {
+.btn .btn-primary{
   color: #59c1a7;
   
 }
@@ -20,8 +20,8 @@ a {
 }
 /* Full-width input fields */
 input[type=text], input[type=password] {
-  width: 100%;
-  padding: 15px;
+  width: 25%;
+  /* padding: 15px; */
   margin: 5px 0 22px 0;
   display: inline-block;
   border: 2px solid black;

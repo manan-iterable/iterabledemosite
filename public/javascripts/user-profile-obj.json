@@ -1,0 +1,28 @@
+{
+    "email": "manan.mehta@iterable.com",
+    "fullName": "Manan Mehta",
+    "firstName": "Manan",
+    "lastName": "Mehta",
+    "startDate": "2022-08-01",
+    "roel": "Sr Solutions Architect",
+    "numberOfCustomer": 10
+},
+{
+    "email": "manan.mehta@iterable.com",
+    
+    "dataFields":{
+    "fullName": "Manan Mehta",
+        "firstName": "Manan",
+        "lastName": "Mehta",
+        "startDate": "2022-08-01",
+        "roel": "Sr Solutions Architect",
+        "numberOfCustomer": 10,
+        "address":{
+            "street": "71 Stevenson St",
+            "suite": "300", 
+            "city": "San Francisco",
+            "state": "CA",
+            "zip": "94105"
+        }
+    }
+}

@@ -3,26 +3,12 @@ var click = 0;
 var email = localStorage.getItem("email") || null;
 var apikey = 'ff288e91e5f9442cb6ce6ea238886298';
 
-
-var renderEmailInput = '<hr><label for="email"><b>Email</b></label>\n<input type="text" name="email" id="email" pattern=".+@globex\.com" required>\n<button class="btn btn-success" type="button" id="email" onclick="addemail()">Add email</button></br><small>Please enter your email.</small><hr>';
-var renderExistingEmail = `Alreday logged in as: ${email}`;
-
-
-if(email == null){
-    document.querySelector(".emailbox").innerHTML = renderEmailInput   
-}else{
-    console.log(renderExistingEmail);
-    document.querySelector(".emailbox").innerHTML = renderExistingEmail
-
-    setTimeout(getmessage(), 5000);    
-    
-}
 function addemail() {
     console.log("add email");
-    localStorage.setItem('email', document.getElementById('email').value);
+    localStorage.setItem('email', document.getElementById('emailtext').value);
     email = localStorage.getItem("email");
 
-    setTimeout(identifyUser(), 2000);    
+    // setTimeout(identifyUser(), 2000);    
 
        
 }
@@ -36,7 +22,7 @@ function identifyUser() {
         "SA_WebUser_Test_Key": "completed"
     }]);
 
-    setTimeout(sendCustomEvent(), 2000);    
+    // setTimeout(sendCustomEvent(), 2000);    
 
 }
 
@@ -56,7 +42,7 @@ function sendCustomEvent() {
         "url": "https://iterable.com/sa-test/manan",
         "secret_code_key": "Code_2022"
     }]);
-    setTimeout(getmessage(), 2000);;
+    // setTimeout(getmessage(), 2000);
 }
 
 // Replace <API key> with an Iterable API key (of type JavaScriptSDK)

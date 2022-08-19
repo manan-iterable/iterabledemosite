@@ -15,7 +15,7 @@ var app = new Vue({
         console.log("add email");
         localStorage.setItem('email', document.getElementById('email').value);
         email = localStorage.getItem("email");
-        setTimeout(app.identifyUser(), 2000);  
+        // setTimeout(app.identifyUser(), 2000);  
       },
       greet: function () {
         console.log("greet");
@@ -28,7 +28,7 @@ var app = new Vue({
             "SA_WebUser_Test_Key": "completed"
         }]);
     
-        setTimeout(app.sendCustomEvent(), 2000);    
+        // setTimeout(app.sendCustomEvent(), 2000);    
         },
         sendCustomEvent() {
             console.log("send custom event");
@@ -38,7 +38,7 @@ var app = new Vue({
                 "url": "https://iterable.com/sa-test/manan",
                 "secret_code_key": "Code_2022"
             }]);
-            setTimeout(app.getmessage(), 2000);;
+            // setTimeout(app.getmessage(), 2000);
         },
         getmessage() {
             let getemail = localStorage.getItem("email");
@@ -58,7 +58,7 @@ var app = new Vue({
                     console.log('Error Getting Response');
                     console.log(err);
                     localStorage.clear();
-                    setTimeout(location.reload(),2000);
+                    // setTimeout(location.reload(),2000);
         
                 })
         }
