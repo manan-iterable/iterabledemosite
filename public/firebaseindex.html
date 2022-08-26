@@ -142,15 +142,7 @@ limitations under the License.
   }
 
   function registerIterableUserToken(){
-    axios.post('https://api.iterable.com/api/users/registerBrowserToken', {
-        email: userEmail,
-        browserToken: iterable_key
-    }).then(function(response) {
-        console.log(response);
-    })
-    .catch(function(error) {
-        console.log(error);
-    })
+    
   }
   // Send the registration token your application server, so that it can:
   // - send messages back to this app
@@ -158,6 +150,15 @@ limitations under the License.
   function sendTokenToServer(currentToken) {
     if (!isTokenSentToServer()) {
       console.log('Sending token to server...');
+      axios.post('https://api.iterable.com/api/users/registerBrowserToken',
+      { email: userEmail, browserToken: currentToken }, 
+      { headers: { "api-key": iterable_key } }
+    ).then(function(response) {
+        console.log(response);
+    })
+    .catch(function(error) {
+        console.log(error);
+    })
       // TODO(developer): Send the current token to your server.
       setTokenSentToServer(true);
     } else {
