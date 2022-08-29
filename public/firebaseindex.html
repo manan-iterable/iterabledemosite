@@ -108,6 +108,14 @@ limitations under the License.
   messaging.onMessage((payload) => {
     console.log('Message received. ', payload);
     // Update the UI to include the received message.
+    const notificationTitle = payload.notification.title;
+    const notificationOptions = {
+      body: payload.notification.body,
+      icon: '../utils/firebase-logo.png'
+    };
+
+  self.registration.showNotification(notificationTitle,
+    notificationOptions);
     appendMessage(payload);
   });
 
