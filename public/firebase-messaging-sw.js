@@ -16,8 +16,8 @@ const messaging = firebase.messaging();
  // are not available in the service worker.
  importScripts('https://www.gstatic.com/firebasejs/9.2.0/firebase-app-compat.js');
  importScripts('https://www.gstatic.com/firebasejs/9.2.0/firebase-messaging-compat.js');
- import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js";
- import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-analytics.js";
+//  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js";
+//  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-analytics.js";
 
  // Initialize the Firebase app in the service worker by passing in
  // your app's Firebase config object.
