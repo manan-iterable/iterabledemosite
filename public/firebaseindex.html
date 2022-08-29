@@ -108,16 +108,9 @@ limitations under the License.
   messaging.onMessage((payload) => {
     console.log('Message received. ', payload);
     // Update the UI to include the received message.
-    const notificationTitle = payload.notification.title;
-    const notificationOptions = {
-      body: payload.notification.body,
-      icon: '../utils/firebase-logo.png'
-    };
-
-  self.registration.showNotification(notificationTitle,notificationOptions);
-  
-  appendMessage(payload);
+    appendMessage(payload);
   });
+
 
   function resetUI() {
     clearMessages();
@@ -149,9 +142,6 @@ limitations under the License.
     tokenElement.textContent = currentToken;
   }
 
-  function registerIterableUserToken(){
-    
-  }
   // Send the registration token your application server, so that it can:
   // - send messages back to this app
   // - subscribe/unsubscribe the token from topics
