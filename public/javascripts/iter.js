@@ -7,10 +7,7 @@ function addemail() {
     console.log("add email");
     localStorage.setItem('email', document.getElementById('emailtext').value);
     email = localStorage.getItem("email");
-
     // setTimeout(identifyUser(), 2000);    
-
-       
 }
 
 // Identify the user and set some fields on their Iterable profile 
