@@ -11,7 +11,10 @@ a {
 }
 .btn .btn-primary{
   color: #59c1a7;
-  
+}
+.btn {
+  margin-top: 10px; 
+
 }
 /* Add padding to containers */
 .container {

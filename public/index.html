@@ -9,15 +9,7 @@
 
         <!-- Iterable Scripts -->
         <script src="https://unpkg.com/@iterable/web-sdk/index.js"></script>
-        <!-- <script type="text/javascript" src="https://js.iterable.com/iterableUtils.js"></script>
-        
-            <script>
-            (function () {
-                var b = document.createElement('script'); b.type = 'text/javascript'; b.async = true;
-                b.src = 'https://js.iterable.com/analytics.js';
-                var a = document.getElementsByTagName('script')[0]; a.parentNode.insertBefore(b, a);
-            })();
-        </script> -->
+        <!-- <script type="text/javascript" src="https://js.iterable.com/iterableUtils.js"></script>-->
     </head>
     <body>
         <!-- <script type="text/javascript" src="../javascripts/iter.js"></script> -->
@@ -27,8 +19,16 @@
         
         <div class="container">
             <h3>Welcome to Iterable Demo</h3>
-                <div id="emailexist"></div>
-                <div id="noemailexist"></div>
+                <div id="emailexist">
+                    <hr><label for="email"><b>Email: </b></label><input class="input-sm" type="text" name="email" id="emailtext" pattern=".+@globex\.com" required> <button class="btn-primary btn-sm" type="button" id="email" onclick="login()">Login</button>
+                </div>
+                <div id="noemailexist">
+                    <!-- <button class="btn btn-success btn-sm" type="button" id="email" onclick="logout()">Logout</button> -->
+                </div>
+                <button class="btn btn-success btn-sm" type="button" id="smsPushTrigger" onclick="triggerSmsWorkflow()">Trigger SMS Push Journey</button><br>
+                <button class="btn btn-success btn-sm" type="button" id="webPushTrigger" onclick="triggerWebPush()">Trigger Web Push</button><br>
+                <button class="btn btn-success btn-sm" type="button" id="webInAppTrigger" onclick="triggerWebInApp()">Trigger Web In-App</button><br>
+
              </div>   
         </body>
 </html>
