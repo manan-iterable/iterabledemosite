@@ -25,10 +25,16 @@
                 <div id="noemailexist">
                     <!-- <button class="btn btn-success btn-sm" type="button" id="email" onclick="logout()">Logout</button> -->
                 </div>
+                <!-- <button class="btn btn-success btn-sm" type="button" id="jwtid" onclick="init()">Get JWT Token</button><br> -->
                 <button class="btn btn-success btn-sm" type="button" id="smsPushTrigger" onclick="triggerSmsWorkflow()">Trigger SMS Push Journey</button><br>
                 <button class="btn btn-success btn-sm" type="button" id="webPushTrigger" onclick="triggerWebPush()">Trigger Web Push</button><br>
                 <button class="btn btn-success btn-sm" type="button" id="webInAppTrigger" onclick="triggerWebInApp()">Trigger Web In-App</button><br>
-
+                <button class="btn btn-success btn-sm" type="button" id="trackEventsTrigger" onclick="trackEvents()">Trigger Track Events</button><br><br>
+                <button class="btn btn-success btn-sm" type="button" id="getJwtTrigger" onclick="getJwt()">Get JWT</button>
+                <p class="jwtclass">JWT Received</p><br><br>
+                <button class="btn btn-success btn-sm" type="button" id="webSdkBroswerInAppMessagingTrigger" onclick="webSdkBroswerInAppMessaging()">Trigger Browser In-App Web SDK</button><br><br>
+                <div id="inappwebcontent"></div>
              </div>   
         </body>
 </html>
+
