@@ -270,3 +270,5 @@ function f (x, y, ...a) {
 }
 // a = ["hello", true, 7] an array
 f(1, 2, "hello", true, 7) === 9
+
+//create email verification function
