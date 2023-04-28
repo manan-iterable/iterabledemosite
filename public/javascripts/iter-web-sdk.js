@@ -1,8 +1,8 @@
 console.log("loading iter-web-sdk.js");
 var email = localStorage.getItem("email") || null;
-var apikey = 'f8d693597232460fab38bdd104c785d5';
-var jwtapikey= '0c29175314ab4a84bf9307e6a28a3ad5';
-var jwtsec = '7005e322b1e6ed3979b901527fa4ce414face64133b2f603b002121d4cc2174f3335f5be51f326aaa866682515139a6560214b376556de942891ccfc4d4a33c4'
+var apikey = '';
+var jwtapikey= '';
+var jwtsec = ''
 var jwt = ""
 
 $(document).ready(function() {
