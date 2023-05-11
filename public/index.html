@@ -21,13 +21,17 @@
         <div class="container">
             <h3>Welcome to Iterable Demo</h3>
                 <div id="emailexist">
-                    <hr><label for="email"><b>Email: </b></label><input class="input-sm" type="text" name="email" id="emailtext" pattern=".+@globex\.com" required> <button class="btn-primary btn-sm" type="button" id="email" onclick="login()">Login</button>
+                    <hr><label></label><b>API key: </b></label><input class="input-sm" type="text" name="apikey" id="apikey"required></br>
+                    <label><b>JWT API Key: </b></label><input class="input-sm" type="text" name="jwtapikey" id="jwtapikey" required> </br>
+                    <label><b>JWT Secret: </b></label><input class="input-sm" type="text" name="jwtapikey" id="jwtsec"required> 
+                </br><button class="btn-primary btn-sm" type="button" id="email" onclick="submitkeys()">Submit Keys</button>
+                    <hr><label><b>Email: </b></label><input class="input-sm" type="text" name="email" id="emailtext" pattern=".+@globex\.com" required> <button class="btn-primary btn-sm" type="button" id="email" onclick="login()">Login</button>
                 </div>
                 <div id="noemailexist">
                     <!-- <button class="btn btn-success btn-sm" type="button" id="email" onclick="logout()">Logout</button> -->
                 </div>
                 <!-- <button class="btn btn-success btn-sm" type="button" id="jwtid" onclick="init()">Get JWT Token</button><br> -->
-                <button class="btn btn-success btn-sm" type="button" id="smsPushTrigger" onclick="triggerSmsWorkflow()">Trigger SMS Push Journey</button><br>
+                <hr><button class="btn btn-success btn-sm" type="button" id="smsPushTrigger" onclick="triggerSmsWorkflow()">Trigger SMS Push Journey</button><br>
                 <button class="btn btn-success btn-sm" type="button" id="webPushTrigger" onclick="triggerWebPush()">Trigger Web Push</button><br>
                 <button class="btn btn-success btn-sm" type="button" id="webInAppTrigger" onclick="triggerWebInApp()">Trigger Web In-App</button><br>
                 <button class="btn btn-success btn-sm" type="button" id="trackEventsTrigger" onclick="trackEvents()">Trigger Track Events</button><br><br>
