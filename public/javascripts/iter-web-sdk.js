@@ -1,6 +1,6 @@
 console.log("loading iter-web-sdk.js");
 var email = localStorage.getItem("email") || null;
-var apikey = '';
+// var apikey = '';
 var jwtapikey= '';
 var jwtsec = ''
 var jwt = ""
@@ -29,6 +29,7 @@ function login() {
     console.log("add email");
     console.log("Login....");
     localStorage.setItem('email', document.getElementById('emailtext').value);
+    localStorage.setItem('apikey', document.getElementById('apikey').value);
     email = localStorage.getItem("email");
     $("#emailexist").text(`You Logged in as ${email}`);
     $("#emailexist").append(`&nbsp;&nbsp;<button class="btn-primary btn-sm" type="button" id="email" onclick="logout()">Logout</button>`)
@@ -110,8 +111,9 @@ function getJwt(){
 
 function logout(){
     console.log("Logout....");
-    localStorage.removeItem('email');
-    localStorage.removeItem('jwtToken');
+    localStorage.clear();
+    // localStorage.removeItem('email');
+    // localStorage.removeItem('jwtToken');
     location.reload();
 }
 
@@ -218,6 +220,55 @@ function triggerWebInApp(){
         
     })
 }
+
+function webSdkTrackPurchase(){
+        var purchaseData = {
+            "id": "a22432d438e",
+            "user": {
+            "email": "manan.mehta+warbyparkertest@iterable.com"
+            },
+            "items": [
+            {
+                "id": "ecb542",
+                "sku": "59422",
+                "name": "The Black Tee",
+                "description": "The Black Tee",
+                "price": 21.99,
+                "quantity": 1
+            },
+            {
+                "id": "bf5de1",
+                "sku": "59446",
+                "name": "Twill Cap",
+                "description": "Black Twill Cap",
+                "price": 11.99,
+                "quantity": 1
+            }
+            ],
+            "campaignId": parseInt(Cookies.get('iterableEmailCampaignId')),
+            "templateId": parseInt(Cookies.get('iterableTemplateId')),
+            "total": 33.98
+    };
+    var config = {
+        method: 'post',
+        url: 'https://api.iterable.com/api/commerce/trackPurchase',
+        headers: {
+            'Content-Type': 'application/json',
+            'Api-key': localStorage.getItem('apikey')
+        },
+        data: JSON.stringify(purchaseData)
+    };
+
+    axios.request(config)
+        .then((response) => {
+            console.log(JSON.stringify(response.data));
+        })
+        .catch((error) => {
+            console.log(error);
+            alert("Error sending purchase event")
+        });
+}
+
 
 function trackEvents(){
     let apiConfig = {

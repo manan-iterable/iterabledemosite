@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <!-- Optional; provides methods for query string parsing and working with cookies -->
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
+        <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
         <!-- Iterable Scripts -->
         <script src="https://unpkg.com/@iterable/web-sdk/index.js"></script>
         <!-- <script type="text/javascript" src="https://js.iterable.com/iterableUtils.js"></script>-->
@@ -21,11 +21,11 @@
         <div class="container">
             <h3>Welcome to Iterable Demo</h3>
                 <div id="emailexist">
-                    <hr><label></label><b>API key: </b></label><input class="input-sm" type="text" name="apikey" id="apikey"required></br>
                     <label><b>JWT API Key: </b></label><input class="input-sm" type="text" name="jwtapikey" id="jwtapikey" required> </br>
                     <label><b>JWT Secret: </b></label><input class="input-sm" type="text" name="jwtapikey" id="jwtsec"required> 
                 </br><button class="btn-primary btn-sm" type="button" id="email" onclick="submitkeys()">Submit Keys</button>
-                    <hr><label><b>Email: </b></label><input class="input-sm" type="text" name="email" id="emailtext" pattern=".+@globex\.com" required> <button class="btn-primary btn-sm" type="button" id="email" onclick="login()">Login</button>
+                <hr><label><b>API key: </b></label><input class="input-sm" type="text" name="apikey" id="apikey"required></br>
+                <label><b>Email: </b></label><input class="input-sm" type="text" name="email" id="emailtext" pattern=".+@globex\.com" required> <button class="btn-primary btn-sm" type="button" id="email" onclick="login()">Login</button>
                 </div>
                 <div id="noemailexist">
                     <!-- <button class="btn btn-success btn-sm" type="button" id="email" onclick="logout()">Logout</button> -->
@@ -39,6 +39,7 @@
                 <p class="jwtclass">JWT Received</p><br><br>
                 <button class="btn btn-success btn-sm" type="button" id="webSdkBroswerInAppMessagingTrigger" onclick="webSdkBroswerInAppMessaging()">Trigger Browser In-App Web SDK</button><br><br>
                 <div id="inappwebcontent"></div>
+                <button class="btn btn-success btn-sm" type="button" id="webSdkTrackPurchaseTrigger" onclick="webSdkTrackPurchase()">Track Purchase</button><br><br>
              </div>   
         </body>
 </html>
