@@ -1,9 +1,10 @@
-console.log("loading iter-web-sdk.js");
+
 var email = localStorage.getItem("email") || null;
+var jwt = localStorage.getItem("jwtToken") || null;
+var apikey = localStorage.getItem("apikey") || null;
 // var apikey = '';
 var jwtapikey= '';
 var jwtsec = ''
-var jwt = ""
 
 $(document).ready(function() {
     if(localStorage.getItem("jwtToken") == null){
@@ -11,14 +12,14 @@ $(document).ready(function() {
     }else{
         $('.jwtclass').css("display", "block");
     }
-    if(email != null){
-        console.log("email exist");
+    if(email != null && (jwt != null || apikey != null)){
+        console.log("email and jwt token exist");
         // $("#emailexist").css("display", "block")
-        $("#emailexist").text(`You Logged in as ${email}`);
+        $("#emailexist").text(`You Logged in as ${email} & JWT exist`);
         $("#emailexist").append(`&nbsp;&nbsp;<button class="btn-primary btn-sm" type="button" id="email" onclick="logout()">Logout</button>`)
         // document.getElementById("emailexist").innerHTML = email;
     }else{
-        console.log("email does not exist");
+        console.log("email & jwt does not exist");
         $("noemailexist").css("display", "block")
         //$('#noemailexist').html(`<hr><label for="email"><b>Email: </b></label><input class="input-sm" type="text" name="email" id="emailtext" pattern=".+@globex\.com" required> <button class="btn btn-success btn-sm" type="button" id="email" onclick="login()">Login</button>`);
         
@@ -30,15 +31,16 @@ function login() {
     console.log("Login....");
     localStorage.setItem('email', document.getElementById('emailtext').value);
     localStorage.setItem('apikey', document.getElementById('apikey').value);
+    localStorage.setItem('jwtToken', document.getElementById('jwtToken').value);
     email = localStorage.getItem("email");
     $("#emailexist").text(`You Logged in as ${email}`);
     $("#emailexist").append(`&nbsp;&nbsp;<button class="btn-primary btn-sm" type="button" id="email" onclick="logout()">Logout</button>`)
     $( "#noemailexist" ).remove();
 
     // store api key
-    localStorage.setItem('apikey', apikey);
-    localStorage.setItem('jwtapikey', jwtapikey);
-    localStorage.setItem('jwtsec', jwtsec);
+    // localStorage.setItem('apikey', apikey);
+    // localStorage.setItem('jwtapikey', jwtapikey);
+    // localStorage.setItem('jwtsec', jwtsec);
     // init iterable sdk
     // init();      
 }
@@ -85,7 +87,7 @@ function getEmail() {
 function getJwt(){
     console.log(`get jwt`)
     //expires 12/13/23
-    const tempJwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDI0ODE4NDEsImlhdCI6MTY3MzYyNDI0MSwiZW1haWwiOiJtYW5hbi5tZWh0YUBpdGVyYWJsZS5jb20ifQ.DzZGxz83CaVLZzg9-2tn1d6cylHb7vTMZ5YgdLIQo0Y";
+    const tempJwt = "";
     localStorage.setItem('jwtToken', tempJwt);
     $('.jwtclass').css("display", "block");
     /*
@@ -192,11 +194,9 @@ function webSdkBroswerInAppMessaging(){
                 })
           })
           .catch((e) => {
-            console.log(`Enable to get In app message ${e}`)
+            console.log(`Unable to get In app message ${e}`)
           })
          
-          
-
 }
 
 function triggerWebInApp(){
@@ -262,13 +262,13 @@ function webSdkTrackPurchase(){
     axios.request(config)
         .then((response) => {
             console.log(JSON.stringify(response.data));
+            alert("Success sending purchase event")
         })
         .catch((error) => {
             console.log(error);
             alert("Error sending purchase event")
         });
 }
-
 
 function trackEvents(){
     let apiConfig = {
@@ -289,6 +289,53 @@ function trackEvents(){
     })
 }
 
+function updateUser(jwtInfo){
+    console.log(`Update user web sdk init...`);
+    console.log(`apikey=${jwtInfo.jwtapikey}, jwttoken=${jwtInfo.id_token}`)
+
+        const { setEmail, logout } = window['@iterable/web-sdk'].initialize(
+            jwtInfo.jwtapikey, () => Promise.resolve(jwtInfo.id_token)
+        );
+        
+        // window['@iterable/web-sdk'].updateUser({ dataFields: { "isVerified": true}})
+        //         .then((response)=>{
+        //             console.log(`update user: ${response}`);
+        //         })
+        //         .catch((e)=>{
+        //             console.log(`update user error: ${e}`)
+        //         });
+        
+    
+                const { request, pauseMessageStream, resumeMessageStream } = window['@iterable/web-sdk'].getInAppMessages(
+                    {
+                      count: 5,
+                      packageName: 'mydemosite',
+                      handleLinks: 'open-all-same-tab',
+                    },
+                      { display: 'immediate' }
+                  );
+              
+                  setEmail(localStorage.getItem('email'))
+                    .then(() => {
+                      console.log(`Email set ${localStorage.getItem('email')}`);
+                      request()
+                          .then((response) =>{
+                              console.log(`called inapp request function`);
+                              // const messageIframe = response.data.inAppMessages[0].content.html;
+                              // console.log(typeof messageIframe)
+                              // document.getElementById('inappwebcontent').insertAdjacentHTML("afterend", messageIframe);
+                          })
+                          .catch((e) =>{
+                              console.log(`error calling in app reqeust function`);
+                              console.log(e)
+                          })
+                    })
+                    .catch((e) => {
+                      console.log(`Unable to get In app message ${e}`)
+                    })
+         
+}
+
 function executeAxios(url,method,data){
     return new Promise((resolve, reject) => {
         let config = {
@@ -297,7 +344,7 @@ function executeAxios(url,method,data){
             headers: { 
                 'Content-Type': 'application/json', 
                 'Accept': '*/*', 
-                'Api-Key': apikey
+                'Api-Key': localStorage.getItem('apikey')
             },
             data : data
         }
@@ -315,11 +362,28 @@ function executeAxios(url,method,data){
 
 }
 
+function generateJWTAndVerify(){
+    let config = {
+        method: 'get',
+        url: `http://localhost:3000/api/generateJWT?email=${email}`,
+      };
+      
+      axios(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        updateUser(response.data)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+      
+}
+
 function f (x, y, ...a) {
     // ...a spread operator
     return (x + y) * a.length
 }
+//https://www.freecodecamp.org/news/javascript-object-destructuring-spread-operator-rest-parameter/
 // a = ["hello", true, 7] an array
 f(1, 2, "hello", true, 7) === 9
 
-//create email verification function

@@ -100,23 +100,40 @@ limitations under the License.
   //Iterable info
   var userEmail = "manan.mehta@iterable.com";
   const firebase_key = "BKJjwtHjb05xuq1bzamHytuJnC2kaHgBEJySO8RACLm-DrfG4c31dAwYQDrNsv_5-2MorlBm-ICz2K7lOgGOtQs";
-  const iterable_key = "ae9686ac44564f7cb3a83a19bfd122b9"
+  const iterable_key = ""
 
   // Handle incoming messages. Called when:
   // - a message is received while the app has focus
   // - the user clicks on an app notification created by a service worker
   //   `messaging.onBackgroundMessage` handler.
+
   messaging.onMessage((payload) => {
     console.log('Message received. ', payload);
     // Update the UI to include the received message.
     const notificationTitle = payload.notification.title;
     const notificationOptions = {
     body: payload.notification.body,
-    icon: '../utils/firebase-logo.png'
+    icon: payload.notification.icon || '../utils/firebase-logo.png',
+    data: { url:payload.fcmOptions.link } //the url which we gonna use later
+    ,click_action : "https://www.iterable.com"
   };
     new Notification(notificationTitle, notificationOptions)
     appendMessage(payload);
+    
   });
+
+
+// messaging.onBackgroundMessage((payload) => {
+//  console.log('[firebase-messaging-sw.js] Received background message ', payload); // debug info
+//  console.log(payload)
+//  const { title, body, icon, ...restPayload } = payload.data;
+//  const notificationOptions = {
+//    body,
+//    icon: icon || '/icons/firebase-logo.png', // path to your "fallback" firebase notification logo
+//    data: restPayload,
+//  };
+//  return self.registration.showNotification(title, notificationOptions);
+// });
 
 
   function resetUI() {
