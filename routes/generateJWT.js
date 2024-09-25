@@ -4,34 +4,32 @@ const jwtsecret = process.env.ITERJWTSEC
 const jwtapikey = process.env.ITERJWTAPIKEY
 
 const generateJWT = (req, res) => {
-    console.log(`getjwt query------${JSON.stringify(req.query)}`);
+    console.log(`getjwt body------${JSON.stringify(req.body)}`);
 
     let dateNow = Math.round(Date.now()/1000);
 	// console.log(`dateNow ${dateNow}`);
-	let monthexp = 30 * 24 * 60 * 60 * 60;
-	let dateExp = (dateNow + monthexp);
 	// console.log(`dateExp ${dateExp}`);
 	// console.log('JWT Create UTC= ', moment.utc(dateNow*1000).format('LLLL'));
 	// console.log('JWT Expire UTC= ', moment.utc(dateExp*1000).format('LLLL'));
 
-    let jwtPayload = null;
-    let jwtexpireIn = "7d";
-    if(req.query.email){
+    /*if(req.query.email){
         jwtPayload = { 
             "email": req.query.email,
-            "exp": Math.floor(Date.now() / 1000) + (60 * 60 * 7)
+            "exp": Math.floor(Date.now() / 1000) + (60 * 60 * 365)
         }
     }
     else{
         jwtPayload = { 
             "userId": req.query.userId,
-            "exp": Math.floor(Date.now() / 1000) + (60 * 60 * 7)
+            "exp": Math.floor(Date.now() / 1000) + (60 * 60 * 365)
         }
-    }
+    }*/
+
+    let jwtexpireIn = "350d";            
     let token = jwt.sign({
-        email: req.query.email || req.query.userId
+        email: req.body.email || req.body.userId
       }, jwtsecret, { expiresIn: jwtexpireIn });
-    
+    console.log(`req body`, req.body);
     let verify = jwt.verify(token,jwtsecret,function(err, decoded){
         if(err){
             console.log('err==>',err);

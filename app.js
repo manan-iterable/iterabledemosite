@@ -32,7 +32,7 @@ router.get('/health', (req, res)=>{
 router.get('/api/first', firstIndex);
 router.get('/api/getUserShoppinCart', getShoppingCart.getShoppingCart);
 router.get('/api/checkShopping', getShoppingCart.checkShopping);
-router.get('/api/generatejwt', getJWT.generateJWT)
+router.post('/api/generatejwt', getJWT.generateJWT)
 router.post('/api/track-event',trackevent.itblTrackEvent)
 
 app.use(router);

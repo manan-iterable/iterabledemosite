@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Manan Demo Site</title>
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="../stylesheets/style.css"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <!-- Optional; provides methods for query string parsing and working with cookies -->
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    </head>
+    <body>
+        <!-- Enter an email address, then click the button to track an event -->
+        <script type="text/javascript" src="../javascripts/iterable_conversion.js"></script>
+
+        <h3>Welcome to Iterable Conversion Demo</h3>
+        <div id="addkey">
+        <hr><label><b>API key: </b></label><input class="input-sm" type="text" name="apikey" id="apikey"required><button class="btn-primary btn-sm" type="button" id="addbutton" onclick="addkey()">Add</button></br></div>
+        <p>Available Params: </p>
+        <div id="parameter-table"></div>
+        </br><button class="btn-primary btn-sm" type="button" id="convert" onclick="letsConvert()">Conversion Trigger</button>
+        <script>
+            $(document).ready(function() {
+                // Function to get the value of a URL parameter
+                    function getUrlParameter(name) {
+                    name = name.replace(/[\[\]]/g, '\\$&');
+                    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+                    var results = regex.exec(window.location.href);
+                    if (!results) return null;
+                    if (!results[2]) return '';
+                    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+                    }
+
+                    // Parameters to check
+                    var params = ['campaignId', 'templateId', 'email'];
+
+                    // Object to hold parameter values
+                    var paramValues = {};
+
+                    // Check and store each parameter in session storage
+                    params.forEach(function(param) {
+                    var value = getUrlParameter(param);
+                    if (value) {
+                        sessionStorage.setItem(param, value);
+                    }
+                    paramValues[param] = sessionStorage.getItem(param) || 'Not Available';
+                    });
+
+                    // Create the table
+                    var table = $('<table>').attr('border', '1');
+
+                    // Create table header
+                    var header = $('<tr>');
+                    header.append($('<th>').text('Parameter'));
+                    header.append($('<th>').text('Value'));
+                    table.append(header);
+
+                    // Insert parameter values into the table
+                    params.forEach(function(param) {
+                    var row = $('<tr>');
+                    row.append($('<td>').text(param));
+                    row.append($('<td>').text(paramValues[param]));
+                    table.append(row);
+                    });
+
+                    // Append the table to the div
+                    $('#parameter-table').append(table);
+                });
+       
+            function addkey (){
+                sessionStorage.setItem('apikey', document.getElementById('apikey').value);
+                $("#addkey").text(`Key Added!!`);
+            }
+            function letsConvert(){
+                const myHeaders = new Headers();
+                myHeaders.append("Content-Type", "application/json");
+                myHeaders.append("Accept", "*/*");
+                myHeaders.append("Api-key", sessionStorage.getItem("apikey"));
+                const email = "manan.mehta@iterable.com";
+                const eventName = 'trialStarted';
+                const raw = JSON.stringify({
+                    "eventName": eventName,
+                    "email": email,
+                    "campaignId": parseInt(sessionStorage.getItem('campaignId'))
+                });
+
+                const requestOptions = {
+                method: "POST",
+                headers: myHeaders,
+                body: raw,
+                redirect: "follow"
+                };
+
+                fetch("https://api.iterable.com/api/events/track", requestOptions)
+                .then((response) => response.text())
+                .then((result) => {console.log(result); alert(`Conversion Recorded. Custom Event ${eventName} Sent.`)})
+                .catch((error) => console.error(error));
+                            }
+       </script>
+        </body>
+</html>
+
